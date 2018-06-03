@@ -1,4 +1,11 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+
+
+@NgModule({
+  imports: [FormsModule, ReactiveFormsModule ]
+})
 
 @Component({
   selector: 'app-root',
@@ -6,5 +13,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = 'Welcome to your Academic Assistant';
 }

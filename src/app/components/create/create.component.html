@@ -1,0 +1,26 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    {{ title }}
+  </div>
+  <div class="panel-body">
+    <form [formGroup]="angForm" novalidate>
+      <div class="form-group">
+        <label class="col-md-4">Trainee Name</label>
+        <input type="text" class="form-control" formControlName="name" #name />
+      </div>
+      <div *ngIf="angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['name'].errors.required">Trainee Name is required.</div>
+      </div>
+      <div class="form-group">
+        <label for="session">Select a Training Session</label>
+        <select name="session" [(ngModel)]="trainee_in_progress.session" class="form-control" id="session" required #session="ngModel">
+          <option *ngFor="let session of trainee_in_progress.sessions" [ngValue]="session">{{session}}</option>
+        </select>
+        <div [hidden]="session.valid || session.pristine" class="alert alert-danger">You must select a training session to sign up.</div>
+      </div>
+      <div class="form-group">
+        <button (click)="addTrainee(name.value, session.value)" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-primary">Sign Up</button>
+      </div>
+    </form>
+  </div>
+</div>
