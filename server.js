@@ -22,6 +22,7 @@ const port = process.env.PORT || 4000;
 
 app.use('/trainees', traineeRoutes);
 app.use('/lists', listRoutes);
+app.use('/sessions', sessionRoutes);
 
 const server = app.listen(port, function () {
     console.log('Listening on port ' + port);

@@ -1,3 +1,4 @@
+<h5>Signup heading from create.component, new</h5>
 <div class="panel panel-primary">
   <div class="panel-heading">
     {{ title }}
@@ -13,8 +14,8 @@
       </div>
       <div class="form-group">
         <label for="session">Select a Training Session</label>
-        <select name="session" [(ngModel)]="trainee_in_progress.session" class="form-control" id="session" required #session="ngModel">
-          <option *ngFor="let session of trainee_in_progress.sessions" [ngValue]="session">{{session}}</option>
+        <select name="session" [(ngModel)]="sessionLocal" class="form-control" id="session" required #session="ngModel" [ngModelOptions]="{standalone: true}">
+          <option *ngFor="let session of sessions" [ngValue]="session">{{session.dateTime}}</option>
         </select>
         <div [hidden]="session.valid || session.pristine" class="alert alert-danger">You must select a training session to sign up.</div>
       </div>
@@ -23,4 +24,22 @@
       </div>
     </form>
   </div>
-</div>
+
+<ng-container *ngIf="show"> 
+  <h4> You're Signed Up : ) </h4>
+  <h5>We'll see you [and your computer] at :</h5>
+  <div class="row">
+    <div class="col-xs-3">Date & Time</div>
+    <div class="col-xs-9 pull-left">{{ sessionLocal.dateTime }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Location</div>
+    <div class="col-xs-9 pull-left">{{ sessionLocal.location }}</div>
+  </div>
+
+<!-- To do: add name fill-in from trainee object/ngmodel @dnilasor -->
+<h6>This training will prepare you to administer virtually proctored exams beginning in the {{ sessionLocal.termFor }} semester. </h6>
+
+<br>
+<button class="btn btn-default" (click)="submitted=false">Edit my registration</button>
+</ng-container>

@@ -11,13 +11,16 @@ import { EditComponent } from './components/edit/edit.component';
 import { appRoutes } from './routerConfig';
 
 import { TraineeService } from './trainee.service';
+import { SessionService } from './session.service';
+import { ConfirmComponent } from './src/spp/components/confirm/confirm.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
     CreateComponent,
-    EditComponent
+    EditComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,7 @@ import { TraineeService } from './trainee.service';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [TraineeService],
+  providers: [TraineeService, SessionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

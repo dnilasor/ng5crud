@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { TraineeService } from '../../trainee.service';
 import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule, NgControl } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
 import { Trainee } from './Trainee';
 import { Session } from './Session';
+import { SessionService } from '../../session.service';
 
 @NgModule({
   imports: [
@@ -19,12 +22,14 @@ export class CreateComponent implements OnInit {
 
   title = 'Sign Up for Virtual Proctoring Training Session';
   angForm: FormGroup;
-
-  trainee_in_progress: Trainee;
+  sessions: any;
+  trainees: any;
   submitted = false;
+  public show = false;
 
 
-  constructor(private traineeservice: TraineeService, private fb: FormBuilder) {
+  // tslint:disable-next-line:max-line-length
+  constructor(private traineeservice: TraineeService, private fb: FormBuilder, private http: HttpClient, private sessionservice: SessionService) {
     this.createForm();
   }
   createForm() {
@@ -35,11 +40,18 @@ export class CreateComponent implements OnInit {
   }
   addTrainee(name, session) {
     this.traineeservice.addTrainee(name, session);
+    this.show = !this.show;
   }
 
   ngOnInit() {
-  }
+    this.getSessions();
 
+  }
+  getSessions() {
+    this.sessionservice.getSessions().subscribe(res => {
+    this.sessions = res;
+    });
+  }
   onSubmit(value: string): void {
     console.log('you submitted value ', value);
   }
