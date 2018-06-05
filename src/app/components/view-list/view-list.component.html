@@ -1,0 +1,14 @@
+<h4>View Registrant List</h4>
+<div>
+<select [(ngModel)]="selected" (ngModelChange)="onSelect(selected)">
+
+      <option *ngFor="let trainee of trainees"
+      [value]="option">
+        {{ trainee.session.dateTime }}</option>
+</select>
+</div>
+<p></p>
+<div{{ selected }}></div>
+<!-- Sort by: 
+
+{{ trainee.session | datetime | }} -->

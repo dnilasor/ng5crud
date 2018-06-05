@@ -38,9 +38,11 @@ export class CreateComponent implements OnInit {
       session: [['7/10/18'], Validators.required ]
     });
   }
-  addTrainee(name, session) {
+  addTrainee(name, session, value: string) {
     this.traineeservice.addTrainee(name, session);
     this.show = !this.show;
+    console.log('you submitted value ', value);
+    this.angForm.reset();
   }
 
   ngOnInit() {
@@ -52,8 +54,10 @@ export class CreateComponent implements OnInit {
     this.sessions = res;
     });
   }
-  onSubmit(value: string): void {
-    console.log('you submitted value ', value);
-  }
+ /*  onSubmit(value: string): void {
+ //   if (this.angForm.valid) {
+      console.log('you submitted value ', value);
+      this.angForm.reset();
+  } */
 
 }
