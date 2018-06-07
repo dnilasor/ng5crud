@@ -1,14 +1,22 @@
 <h4>View Registrant List</h4>
 <div>
+  <label for="session">Filter by Training Session</label>
 <select [(ngModel)]="selected" (ngModelChange)="onSelect(selected)">
-
-      <option *ngFor="let trainee of trainees"
-      [value]="option">
-        {{ trainee.session.dateTime }}</option>
+      <option *ngFor="let trainee of trainees" [ngValue]="trainee">{{ trainee.session.dateTime }}</option>
 </select>
 </div>
 <p></p>
-<div{{ selected }}></div>
+<div>Selected Session</div>
+<div>{{ selected }}</div>
+
+<table>
+  <th>Trainee Name</th>
+  <th>Registered for the training on</th>
+  <tr *ngFor="let trainee of selectedTrainees">
+    <td>{{trainee?.name}}</td>
+    <td>{{trainee?.session}}</td>
+  </tr>
+</table>
 <!-- Sort by: 
 
 {{ trainee.session | datetime | }} -->
